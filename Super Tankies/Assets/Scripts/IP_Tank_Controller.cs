@@ -10,6 +10,9 @@ namespace Tanky
     {
 
         #region Variables
+        [Header("Movement Properties")]
+        public float tankSpeed = 15f;
+        public float tankRotationSpeed = 20f;
 
         private Rigidbody rb;
         private IP_Tank_Inputs input;
@@ -24,9 +27,26 @@ namespace Tanky
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
+            if(rb && input)
+            {
+                HandleMovement();
+            }
+        }
+        #endregion
 
+
+        #region Custom Methods
+        protected virtual void HandleMovement()
+        {
+            //Move Tank forward
+            Vector3 wantedPosition = transform.position + (transform.forward * input.ForwardInput * tankSpeed * Time.deltaTime);
+            rb.MovePosition(wantedPosition);
+
+            //Rotate the Tank
+            Quaternion wantedRotation = transform.rotation * Quaternion.Euler(Vector3.up * (tankRotationSpeed * input.RotationInput * Time.deltaTime));
+            rb.MoveRotation(wantedRotation);
         }
         #endregion
     }
