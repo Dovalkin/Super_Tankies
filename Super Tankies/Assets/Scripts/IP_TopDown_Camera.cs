@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace Cameras
 {
-    public class IP_TopDown_Camera : MonoBehaviour
+    public class IP_TopDown_Camera : IP_Base_Camera
     {
         #region Variables
-        public Transform m_Target;
+        //public Transform m_Target;
 
         [SerializeField]
-        private float m_Height = 10f;
+        public float m_Height = 10f;
 
         [SerializeField]
-        private float m_Distance = 20f;
+        public float m_Distance = 20f;
 
         [SerializeField]
         private float m_Angle = 45f;
@@ -39,12 +39,9 @@ namespace Cameras
         #endregion
 
         #region Helper Methods
-        protected virtual void HandleCamera()
+        protected override void HandleCamera()
         {
-            if (!m_Target)
-            {
-                return;
-            }
+            base.HandleCamera();
 
             Vector3 worldPosition = (Vector3.forward * -m_Distance) + (Vector3.up * m_Height);
             Debug.DrawLine(m_Target.position, worldPosition, Color.red);
