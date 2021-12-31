@@ -67,7 +67,7 @@ namespace Tanky
                 turretLookDir.y = 0f;
 
                 finalTurretLookDir = Vector3.Lerp(finalTurretLookDir, turretLookDir, Time.deltaTime * turretLagSpeed);
-                turretTransform.rotation = Quaternion.LookRotation(turretLookDir);
+                turretTransform.rotation = Quaternion.LookRotation(finalTurretLookDir);
             }
         }
 
