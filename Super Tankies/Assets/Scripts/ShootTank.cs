@@ -9,10 +9,13 @@ public class ShootTank : MonoBehaviour
     public float waitTime;
     public GameObject bullet;
 
+    public ParticleSystem explosion;
+    public Animator recoil;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        recoil = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -26,6 +29,8 @@ public class ShootTank : MonoBehaviour
 
     void Shoot()
     {
+        recoil.SetTrigger("Shoot");
+        explosion.Play();
         Instantiate(bullet.transform, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
     }
 }
